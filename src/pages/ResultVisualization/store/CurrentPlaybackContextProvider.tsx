@@ -36,14 +36,23 @@ const currentPlaybackReducer = (
                 isPlaying: false,
             };
         case "NEXT_STEP":
+            if (state.currentStep >= action.maxStep) {
+                return {
+                    currentStep: action.maxStep,
+                    isPlaying: false,
+                };
+            }
+
+            if (state.currentStep + 1 >= action.maxStep) {
+                return {
+                    currentStep: action.maxStep,
+                    isPlaying: false,
+                };
+            }
+
             return {
                 ...state,
-                currentStep: Math.min(state.currentStep + 1, action.maxStep),
-            };
-        case "END":
-            return {
-                currentStep: action.maxStep,
-                isPlaying: false,
+                currentStep: state.currentStep + 1,
             };
         default:
             return state;
@@ -59,16 +68,11 @@ const CurrentPlaybackContextProvider = ({children, maxStep}: CurrentPlaybackCont
         }
 
         const intervalId = window.setInterval(() => {
-            if (state.currentStep >= maxStep) {
-                dispatch({type: "END", maxStep});
-                return;
-            }
-
             dispatch({type: "NEXT_STEP", maxStep});
         }, 500);
 
         return () => window.clearInterval(intervalId);
-    }, [maxStep, state.currentStep, state.isPlaying]);
+    }, [maxStep, state.isPlaying]);
 
     return(
         <CurrentPlaybackContext.Provider value={{state, dispatch}}>

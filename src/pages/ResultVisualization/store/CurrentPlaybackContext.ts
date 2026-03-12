@@ -4,8 +4,7 @@ export type CurrentPlaybackAction =
     | {type: "PLAY"}
     | {type: "PAUSE"}
     | {type: "RESET"}
-    | {type: "NEXT_STEP"; maxStep: number}
-    | {type: "END"; maxStep: number};
+    | {type: "NEXT_STEP"; maxStep: number};
 
 export interface CurrentPlaybackState {
     currentStep: number;
