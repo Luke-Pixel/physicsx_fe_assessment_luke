@@ -1,4 +1,9 @@
-export type Unit = "pressure" | "kelvin" | "temperature";
+export enum Unit {
+  pressure = 'pressure',
+  kelvin = 'kelvin',
+  temperature = 'temperature',
+}
+
 export function formatValue(value: number, type: Unit) {
   if (type === "pressure") {
     return value;
