@@ -19,3 +19,23 @@ const fetchGridData = async () => {
     console.log(allDataResponse);
     return await allDataResponse.json();
 };
+
+export function useGridQuery() {
+    return useQuery({
+        queryKey: ['grid'],
+        queryFn: fetchGrid,
+        staleTime: 5000,
+    })
+}
+
+const fetchGrid = async () => {
+    const allDataResponse = await fetch(
+        "http://localhost:5001/api/grid"
+    );
+
+    if(!allDataResponse.ok) {
+        throw new Error('Failed to fetch grid');
+    }
+    console.log(allDataResponse);
+    return await allDataResponse.json();
+};
