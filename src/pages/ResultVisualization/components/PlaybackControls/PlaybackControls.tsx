@@ -17,7 +17,7 @@ const PlaybackControls = () => {
                     Reset
                 </button>
             </div>
-            <p>{state.currentStep}</p>
+            <p>Current Step: {state.currentStep}</p>
         </div>
     );
 };
