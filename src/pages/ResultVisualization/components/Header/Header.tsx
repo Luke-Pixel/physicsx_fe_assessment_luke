@@ -18,7 +18,7 @@ const Header = () => {
                         onClick={() => setSelectedUnit(unit)}
                         aria-pressed={selectedUnit === unit}
                     >
-                        {unit}
+                        {capitalize((unit))}
                     </button>
                 ))}
             </div>

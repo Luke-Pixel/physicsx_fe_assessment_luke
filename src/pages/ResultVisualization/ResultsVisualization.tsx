@@ -29,15 +29,12 @@ const ResultsVisualizationContent = ({grid, gridData}: ResultsVisualizationConte
     const cells = formatGridData(gridData, selectedUnit, currentStep, gridSize);
 
     return (
-        <div className="container">
+        <div>
             <div className="header">
                 <Header/>
             </div>
             <div className="grid">
                 <DataGrid cells={cells} gridSize={gridSize}/>
-            </div>
-            <div className="controls">
-                <PlaybackControls/>
             </div>
         </div>
     );
@@ -63,11 +60,16 @@ const ResultsVisualization = () => {
     const maxStep = Math.max((gridData.iterations.length ?? 1) - 1, 0);
 
     return (
-        <CurrentPlaybackContextProvider maxStep={maxStep}>
-            <SelectedUnitContextProvider>
-                <ResultsVisualizationContent grid={grid} gridData={gridData}/>
-            </SelectedUnitContextProvider>
-        </CurrentPlaybackContextProvider>
+        <div className="container">
+            <CurrentPlaybackContextProvider maxStep={maxStep}>
+                <SelectedUnitContextProvider>
+                    <ResultsVisualizationContent grid={grid} gridData={gridData}/>
+                </SelectedUnitContextProvider>
+                <div className="controls">
+                    <PlaybackControls/>
+                </div>
+            </CurrentPlaybackContextProvider>
+        </div>
     );
 };
 
