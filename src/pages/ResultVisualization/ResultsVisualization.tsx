@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import "./ResultsVisualization.css";
 import Header from "./components/Header/Header.tsx";
 import DataGrid from "./components/DataGrid/DataGrid.tsx";
+import CurrentPlaybackContextProvider from "./store/CurrentPlaybackContextProvider.tsx";
+import SelectedUnitContextProvider from "./store/SelectedUnitContextProvider.tsx";
+import PlaybackControls from "./components/PlaybackControls/PlaybackControls.tsx";
 
 const ResultsVisualization: React.FC = () => {
 
@@ -18,17 +21,21 @@ const ResultsVisualization: React.FC = () => {
 
 
   return (
-    <div className="container">
-        <div className="header">
-            <Header/>
+      <CurrentPlaybackContextProvider>
+        <SelectedUnitContextProvider>
+        <div className="container">
+            <div className="header">
+                <Header/>
+            </div>
+          <div className="grid">
+            <DataGrid gridSize={3} />
+          </div>
+          <div className="controls">
+            <PlaybackControls/>
+          </div>
         </div>
-      <div className="grid">
-        <DataGrid gridSize={3} />
-      </div>
-      <div className="controls">
-        {/* paste your code here */}
-      </div>
-    </div>
+        </SelectedUnitContextProvider>
+      </CurrentPlaybackContextProvider>
   );
 };
 
