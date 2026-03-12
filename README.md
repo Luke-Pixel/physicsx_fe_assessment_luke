@@ -13,10 +13,11 @@ The UI lets you:
 
 - Moving types to types folder in unified structure
 - CSS styling to improve UI
-- Split API's per unit type and fetch individually, caching result with tanstack query
+- Split API's per unit type and fetch individually, caching result with Tanstack Query
 - Pagination, possible but pagination on step may cause slow rendering when playing depending on api/network speed
 - Cell text color, set cell color to black when background is light 
-- fix code indention with prettier
+- Fix code indention with prettier
+- Next and Prev step button -> trigger PAUSE action and NEXT_STEP action to allow manually scrolling of steps
 
 ## Technology
 
