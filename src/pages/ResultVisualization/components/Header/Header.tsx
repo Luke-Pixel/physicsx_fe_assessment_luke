@@ -8,17 +8,20 @@ const Header = () => {
     const {selectedUnit, setSelectedUnit} = useContext(SelectedUnitContext);
 
     return (
-        <div style={{display: "flex", gap: "12px"}}>
-            {units.map((unit) => (
-                <button
-                    key={unit}
-                    type="button"
-                    onClick={() => setSelectedUnit(unit)}
-                    aria-pressed={selectedUnit === unit}
-                >
-                    {unit}
-                </button>
-            ))}
+        <div className="header-wrapper">
+            <div style={{display: "flex", gap: "12px"}}>
+                {units.map((unit) => (
+                    <button
+                        key={unit}
+                        type="button"
+                        onClick={() => setSelectedUnit(unit)}
+                        aria-pressed={selectedUnit === unit}
+                    >
+                        {unit}
+                    </button>
+                ))}
+            </div>
+            <h2>{selectedUnit}</h2>
         </div>
     );
 };
