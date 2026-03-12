@@ -1,8 +1,9 @@
 interface GridSizeProps {
     gridSize: number;
+    data: any;
 }
 
-const DataGrid = ({gridSize}: GridSizeProps) => {
+const DataGrid = ({gridSize, data}: GridSizeProps) => {
     return(
         <div className="data-grid-container">
             Data grid here

@@ -1,24 +1,23 @@
-import { useEffect } from "react";
 import "./ResultsVisualization.css";
 import Header from "./components/Header/Header.tsx";
 import DataGrid from "./components/DataGrid/DataGrid.tsx";
 import CurrentPlaybackContextProvider from "./store/CurrentPlaybackContextProvider.tsx";
 import SelectedUnitContextProvider from "./store/SelectedUnitContextProvider.tsx";
 import PlaybackControls from "./components/PlaybackControls/PlaybackControls.tsx";
+import {useGridDataQuery} from "./components/service/useGridDataQuery.ts";
 
 const ResultsVisualization: React.FC = () => {
 
-  // Fetch initial grid data from API
-  useEffect(() => {
-    const fetchGridData = async () => {
-      const allDataResponse = await fetch(
-        "http://localhost:5001/api/iterations"
-      );
-      console.log(allDataResponse.json());
-    };
-    fetchGridData();
-  }, []);
+    // Fetch initial grid data from API
+    const {data, isLoading, isError, refetch} = useGridDataQuery();
 
+  if(isError) {
+      return <div>Error fetching Grid Data... <a onClick={() => refetch()}>retry</a></div>
+  }
+
+  if(isLoading) {
+      return <p>Loading Grid Data...</p>;
+  }
 
   return (
       <CurrentPlaybackContextProvider>
@@ -28,7 +27,7 @@ const ResultsVisualization: React.FC = () => {
                 <Header/>
             </div>
           <div className="grid">
-            <DataGrid gridSize={3} />
+            <DataGrid data={data} gridSize={3} />
           </div>
           <div className="controls">
             <PlaybackControls/>
