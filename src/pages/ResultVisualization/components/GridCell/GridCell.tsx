@@ -2,9 +2,10 @@ interface GridCellProps {
     value: number | string | undefined;
     row: number;
     column: number;
+    backgroundColor: string;
 }
 
-const GridCell = ({value, row, column}: GridCellProps) => {
+const GridCell = ({value, row, column, backgroundColor}: GridCellProps) => {
     return (
         <div
             className="grid-cell"
@@ -12,6 +13,7 @@ const GridCell = ({value, row, column}: GridCellProps) => {
             data-column={column}
             style={{
                 alignItems: "center",
+                backgroundColor,
                 border: "1px solid #d0d0d0",
                 display: "flex",
                 justifyContent: "center",

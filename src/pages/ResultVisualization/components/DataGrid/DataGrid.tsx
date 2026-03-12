@@ -1,5 +1,6 @@
 import {useContext} from "react";
 import {formatValue, Unit} from "../../../../utils/formating.ts";
+import {createColorScale} from "../../../../utils/createColorScale.ts";
 import {CurrentPlaybackContext} from "../../store/CurrentPlaybackContext.ts";
 import {SelectedUnitContext} from "../../store/SelectedUnitContext.ts";
 import GridCell from "../GridCell/GridCell.tsx";
@@ -40,10 +41,16 @@ const DataGrid = ({gridSize, data}: GridSizeProps) => {
         state: {currentStep},
     } = useContext(CurrentPlaybackContext);
 
-
     const iterations = data.iterations;
     const activeIteration = iterations[currentStep] ?? iterations[0];
     const gridTemplateColumns = `repeat(${gridSize}, minmax(0, 1fr))`;
+    const metricGrid = Array.from({length: gridSize}, () => Array.from({length: gridSize}, () => 0));
+
+    activeIteration?.values.forEach(([row, column, metrics]) => {
+        metricGrid[row][column] = parseMetricValue(metrics[selectedUnit] as string | number);
+    });
+
+    const colorScale = createColorScale(metricGrid);
 
     return (
         <div
@@ -53,6 +60,7 @@ const DataGrid = ({gridSize, data}: GridSizeProps) => {
             {activeIteration?.values.map(([row, column, metrics]) => {
                 const rawValue = parseMetricValue(metrics[selectedUnit] as string | number);
                 const displayValue = formatValue(rawValue, selectedUnit as Unit);
+                const backgroundColor = colorScale(rawValue);
 
                 return (
                     <GridCell
@@ -60,6 +68,7 @@ const DataGrid = ({gridSize, data}: GridSizeProps) => {
                         value={displayValue}
                         row={row}
                         column={column}
+                        backgroundColor={backgroundColor}
                     />
                 );
             })}

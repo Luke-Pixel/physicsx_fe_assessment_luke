@@ -1,6 +1,7 @@
 import {useContext} from "react";
 import {Unit} from "../../../../utils/formating.ts";
 import {SelectedUnitContext} from "../../store/SelectedUnitContext.ts";
+import {capitalize} from "lodash";
 
 const units = Object.values(Unit);
 
@@ -21,7 +22,7 @@ const Header = () => {
                     </button>
                 ))}
             </div>
-            <h2>{selectedUnit}</h2>
+            <h2>{capitalize(selectedUnit)}</h2>
         </div>
     );
 };
