@@ -1,4 +1,4 @@
-# PhysicsX FE Assessment
+# PhysicsX FE Assessment - Luke
 
 This project is a small React and TypeScript application for visualising time based grid data from `data.json`.
 
