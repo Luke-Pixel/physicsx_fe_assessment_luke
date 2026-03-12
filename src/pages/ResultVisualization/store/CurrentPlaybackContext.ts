@@ -22,6 +22,7 @@ const defaultState: CurrentPlaybackState = {
 
 const defaultContextValue: CurrentPlaybackContextValue = {
     state: defaultState,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     dispatch: (_action: CurrentPlaybackAction) => undefined,
 };
 
