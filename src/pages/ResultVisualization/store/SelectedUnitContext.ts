@@ -8,6 +8,7 @@ export interface SelectedUnitContextValue {
 
 const defaultContextValue: SelectedUnitContextValue = {
     selectedUnit: Unit.temperature,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setSelectedUnit: (_value: SetStateAction<Unit>) => undefined,
 };
 
