@@ -6,7 +6,8 @@ export enum PlayBackActionType {
     reset = 'RESET',
     nextStep = 'NEXT_STEP',
     nextSingleStep = 'NEXT_SINGLE_STEP',
-    prevStep = 'PREV_STEP'
+    prevStep = 'PREV_STEP',
+    setIntervalMs = 'SET_INTERVAL_MS'
 }
 
 export type CurrentPlaybackAction =
@@ -15,13 +16,15 @@ export type CurrentPlaybackAction =
     | {type: PlayBackActionType.reset}
     | {type: PlayBackActionType.nextStep; maxStep: number}
     | {type: PlayBackActionType.prevStep}
-    | {type: PlayBackActionType.nextSingleStep; maxStep: number};
+    | {type: PlayBackActionType.nextSingleStep; maxStep: number}
+    | {type: PlayBackActionType.setIntervalMs; intervalMs: number};
 
 
 export interface CurrentPlaybackState {
     currentStep: number;
     isPlaying: boolean;
-    maxStep: number
+    maxStep: number;
+    intervalMs: number;
 }
 
 export interface CurrentPlaybackContextValue {
@@ -32,7 +35,8 @@ export interface CurrentPlaybackContextValue {
 const defaultState: CurrentPlaybackState = {
     currentStep: 0,
     isPlaying: false,
-    maxStep: 0
+    maxStep: 0,
+    intervalMs: 500,
 };
 
 const defaultContextValue: CurrentPlaybackContextValue = {

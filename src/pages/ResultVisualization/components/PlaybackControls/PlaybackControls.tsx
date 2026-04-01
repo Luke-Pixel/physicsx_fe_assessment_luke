@@ -19,6 +19,24 @@ const PlaybackControls = () => {
                     Reset
                 </button>
             </div>
+            <div className='playback-control-container'>
+                <label htmlFor="playback-range">Playback Speed:</label>
+                <input
+                    id='playback-range'
+                    type="range"
+                    min={100}
+                    max={5000}
+                    step={100}
+                    value={state.intervalMs}
+                    className="playback-control"
+                    onChange={(event) =>
+                        dispatch({
+                            type: PlayBackActionType.setIntervalMs,
+                            intervalMs: Number(event.target.value),
+                        })}
+                />
+                <span>{state.intervalMs}ms</span>
+            </div>
             <p>Current Step: {state.currentStep}</p>
         </div>
     );

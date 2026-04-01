@@ -7,12 +7,15 @@ const CurrentPlaybackConsumer = () => (
     <CurrentPlaybackContext.Consumer>
         {({state, dispatch}) => (
             <div>
-                <span>{`${state.currentStep}-${state.isPlaying}`}</span>
+                <span>{`${state.currentStep}-${state.isPlaying}-${state.intervalMs}`}</span>
                 <button type="button" onClick={() => dispatch({type: "PLAY"})}>
                     Play
                 </button>
                 <button type="button" onClick={() => dispatch({type: "RESET"})}>
                     Reset
+                </button>
+                <button type="button" onClick={() => dispatch({type: "SET_INTERVAL_MS", intervalMs: 1000})}>
+                    Set Interval
                 </button>
             </div>
         )}
@@ -31,7 +34,7 @@ describe("CurrentPlaybackContextProvider", () => {
             </CurrentPlaybackContextProvider>,
         );
 
-        expect(screen.getByText("0-false")).toBeTruthy();
+        expect(screen.getByText("0-false-500")).toBeTruthy();
     });
 
     it("increments the current step while playing and stops at the end", () => {
@@ -49,7 +52,7 @@ describe("CurrentPlaybackContextProvider", () => {
             vi.advanceTimersByTime(1500);
         });
 
-        expect(screen.getByText("2-false")).toBeTruthy();
+        expect(screen.getByText("2-false-500")).toBeTruthy();
     });
 
     it("resets playback back to step zero", () => {
@@ -69,6 +72,31 @@ describe("CurrentPlaybackContextProvider", () => {
 
         fireEvent.click(screen.getByRole("button", {name: "Reset"}));
 
-        expect(screen.getByText("0-false")).toBeTruthy();
+        expect(screen.getByText("0-false-500")).toBeTruthy();
+    });
+
+    it("uses the updated interval for playback timing", () => {
+        vi.useFakeTimers();
+
+        render(
+            <CurrentPlaybackContextProvider maxStep={4}>
+                <CurrentPlaybackConsumer/>
+            </CurrentPlaybackContextProvider>,
+        );
+
+        fireEvent.click(screen.getByRole("button", {name: "Set Interval"}));
+        fireEvent.click(screen.getByRole("button", {name: "Play"}));
+
+        act(() => {
+            vi.advanceTimersByTime(900);
+        });
+
+        expect(screen.getByText("0-true-1000")).toBeTruthy();
+
+        act(() => {
+            vi.advanceTimersByTime(100);
+        });
+
+        expect(screen.getByText("1-true-1000")).toBeTruthy();
     });
 });

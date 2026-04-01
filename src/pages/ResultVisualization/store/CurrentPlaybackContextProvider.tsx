@@ -32,6 +32,11 @@ const currentPlaybackReducer = (
                 currentStep: 0,
                 isPlaying: false,
             };
+        case PlayBackActionType.setIntervalMs:
+            return {
+                ...state,
+                intervalMs: action.intervalMs,
+            };
         case PlayBackActionType.nextStep:
             if (state.currentStep >= action.maxStep) {
                 return {
@@ -86,6 +91,7 @@ const CurrentPlaybackContextProvider = ({children, maxStep}: CurrentPlaybackCont
         currentStep: 0,
         isPlaying: false,
         maxStep,
+        intervalMs: 500,
     };
 
     const [state, dispatch] = useReducer(currentPlaybackReducer, initialState);
@@ -97,10 +103,10 @@ const CurrentPlaybackContextProvider = ({children, maxStep}: CurrentPlaybackCont
 
         const intervalId = window.setInterval(() => {
             dispatch({type: PlayBackActionType.nextStep, maxStep});
-        }, 500);
+        }, state.intervalMs);
 
         return () => window.clearInterval(intervalId);
-    }, [maxStep, state.isPlaying]);
+    }, [maxStep, state.intervalMs, state.isPlaying]);
 
     return(
         <CurrentPlaybackContext.Provider value={{state, dispatch}}>

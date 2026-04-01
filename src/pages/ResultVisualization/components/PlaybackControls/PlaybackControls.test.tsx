@@ -6,7 +6,7 @@ import {CurrentPlaybackContext, type CurrentPlaybackContextValue} from "../../st
 describe("PlaybackControls", () => {
     it("shows the current step", () => {
         const contextValue: CurrentPlaybackContextValue = {
-            state: {currentStep: 3, isPlaying: false, maxStep: 10},
+            state: {currentStep: 3, isPlaying: false, maxStep: 10, intervalMs: 500},
             dispatch: vi.fn(),
         };
 
@@ -22,7 +22,7 @@ describe("PlaybackControls", () => {
     it("dispatches playback actions when buttons are clicked", () => {
         const dispatch = vi.fn();
         const contextValue: CurrentPlaybackContextValue = {
-            state: {currentStep: 0, isPlaying: false, maxStep: 10},
+            state: {currentStep: 0, isPlaying: false, maxStep: 10, intervalMs: 500},
             dispatch,
         };
 
@@ -37,5 +37,23 @@ describe("PlaybackControls", () => {
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {type: "PLAY"});
         expect(dispatch).toHaveBeenNthCalledWith(2, {type: "RESET"});
+    });
+
+    it("dispatches interval updates when the range changes", () => {
+        const dispatch = vi.fn();
+        const contextValue: CurrentPlaybackContextValue = {
+            state: {currentStep: 0, isPlaying: false, maxStep: 10, intervalMs: 500},
+            dispatch,
+        };
+
+        render(
+            <CurrentPlaybackContext.Provider value={contextValue}>
+                <PlaybackControls/>
+            </CurrentPlaybackContext.Provider>,
+        );
+
+        fireEvent.change(screen.getByLabelText("Playback Speed:"), {target: {value: "1200"}});
+
+        expect(dispatch).toHaveBeenCalledWith({type: "SET_INTERVAL_MS", intervalMs: 1200});
     });
 });
