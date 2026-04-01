@@ -7,7 +7,7 @@ interface SelectedUnitContextProviderProps {
 }
 
 const SelectedUnitContextProvider = ({children}: SelectedUnitContextProviderProps) => {
-    const [selectedUnit, setSelectedUnit] = useState(Unit.temperature);
+    const [selectedUnit, setSelectedUnit] = useState(Unit.pressure);
 
     return (
         <SelectedUnitContext.Provider value={{selectedUnit, setSelectedUnit}}>

@@ -25,7 +25,7 @@ describe("SelectedUnitContextProvider", () => {
             </SelectedUnitContextProvider>,
         );
 
-        expect(screen.getByText("temperature")).toBeTruthy();
+        expect(screen.getByText("pressure")).toBeTruthy();
     });
 
     it("updates the selected unit through context", () => {
