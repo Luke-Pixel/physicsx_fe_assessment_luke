@@ -53,6 +53,21 @@ const currentPlaybackReducer = (
                 ...state,
                 currentStep: state.currentStep + 1,
             };
+        case PlayBackActionType.nextSingleStep:
+            if (state.currentStep >= action.maxStep) {
+                return {
+                    ...state,
+                    currentStep: action.maxStep,
+                    isPlaying: false,
+                };
+            }
+
+
+            return {
+                ...state,
+                currentStep: state.currentStep + 1,
+                isPlaying: false,
+            };
         case PlayBackActionType.prevStep:
             return {
                 ...state,

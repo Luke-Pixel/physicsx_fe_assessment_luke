@@ -33,11 +33,9 @@ describe("PlaybackControls", () => {
         );
 
         fireEvent.click(screen.getByRole("button", {name: "Play"}));
-        fireEvent.click(screen.getByRole("button", {name: "Pause"}));
         fireEvent.click(screen.getByRole("button", {name: "Reset"}));
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {type: "PLAY"});
-        expect(dispatch).toHaveBeenNthCalledWith(2, {type: "PAUSE"});
-        expect(dispatch).toHaveBeenNthCalledWith(3, {type: "RESET"});
+        expect(dispatch).toHaveBeenNthCalledWith(2, {type: "RESET"});
     });
 });

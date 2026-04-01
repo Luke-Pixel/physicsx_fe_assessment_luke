@@ -5,6 +5,7 @@ export enum PlayBackActionType {
     pause = 'PAUSE',
     reset = 'RESET',
     nextStep = 'NEXT_STEP',
+    nextSingleStep = 'NEXT_SINGLE_STEP',
     prevStep = 'PREV_STEP'
 }
 
@@ -13,7 +14,8 @@ export type CurrentPlaybackAction =
     | {type: PlayBackActionType.pause}
     | {type: PlayBackActionType.reset}
     | {type: PlayBackActionType.nextStep; maxStep: number}
-    | {type: PlayBackActionType.prevStep};
+    | {type: PlayBackActionType.prevStep}
+    | {type: PlayBackActionType.nextSingleStep; maxStep: number};
 
 
 export interface CurrentPlaybackState {
