@@ -1,14 +1,25 @@
 import {createContext, type Dispatch} from "react";
 
+export enum PlayBackActionType {
+    play = 'PLAY',
+    pause = 'PAUSE',
+    reset = 'RESET',
+    nextStep = 'NEXT_STEP',
+    prevStep = 'PREV_STEP'
+}
+
 export type CurrentPlaybackAction =
-    | {type: "PLAY"}
-    | {type: "PAUSE"}
-    | {type: "RESET"}
-    | {type: "NEXT_STEP"; maxStep: number};
+    | {type: PlayBackActionType.play}
+    | {type: PlayBackActionType.pause}
+    | {type: PlayBackActionType.reset}
+    | {type: PlayBackActionType.nextStep; maxStep: number}
+    | {type: PlayBackActionType.prevStep};
+
 
 export interface CurrentPlaybackState {
     currentStep: number;
     isPlaying: boolean;
+    maxStep: number
 }
 
 export interface CurrentPlaybackContextValue {
@@ -19,6 +30,7 @@ export interface CurrentPlaybackContextValue {
 const defaultState: CurrentPlaybackState = {
     currentStep: 0,
     isPlaying: false,
+    maxStep: 0
 };
 
 const defaultContextValue: CurrentPlaybackContextValue = {

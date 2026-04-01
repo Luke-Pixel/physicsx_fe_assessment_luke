@@ -6,7 +6,7 @@ import {CurrentPlaybackContext, type CurrentPlaybackContextValue} from "../../st
 describe("PlaybackControls", () => {
     it("shows the current step", () => {
         const contextValue: CurrentPlaybackContextValue = {
-            state: {currentStep: 3, isPlaying: false},
+            state: {currentStep: 3, isPlaying: false, maxStep: 10},
             dispatch: vi.fn(),
         };
 
@@ -22,7 +22,7 @@ describe("PlaybackControls", () => {
     it("dispatches playback actions when buttons are clicked", () => {
         const dispatch = vi.fn();
         const contextValue: CurrentPlaybackContextValue = {
-            state: {currentStep: 0, isPlaying: false},
+            state: {currentStep: 0, isPlaying: false, maxStep: 10},
             dispatch,
         };
 

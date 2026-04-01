@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {CurrentPlaybackContext} from "../../store/CurrentPlaybackContext.ts";
+import {CurrentPlaybackContext, PlayBackActionType} from "../../store/CurrentPlaybackContext.ts";
 
 const PlaybackControls = () => {
     const {state, dispatch} = useContext(CurrentPlaybackContext);
@@ -7,13 +7,15 @@ const PlaybackControls = () => {
     return (
         <div>
             <div style={{display: "flex", gap: "12px"}}>
-                <button type="button" onClick={() => dispatch({type: "PLAY"})}>
+                <button disabled={state.currentStep === 0} onClick={() => dispatch({type: PlayBackActionType.prevStep})}>Prev Step</button>
+                <button type="button" onClick={() => dispatch({type: PlayBackActionType.play})}>
                     Play
                 </button>
-                <button type="button" onClick={() => dispatch({type: "PAUSE"})}>
+                <button type="button" onClick={() => dispatch({type: PlayBackActionType.pause})}>
                     Pause
                 </button>
-                <button type="button" onClick={() => dispatch({type: "RESET"})}>
+                <button disabled={state.currentStep === state.maxStep} onClick={() => dispatch({type: PlayBackActionType.nextStep, maxStep: state.maxStep})}>Next Step</button>
+                <button type="button" onClick={() => dispatch({type: PlayBackActionType.reset})}>
                     Reset
                 </button>
             </div>

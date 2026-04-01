@@ -1,8 +1,9 @@
 import {type ReactNode, useEffect, useReducer} from "react";
 import {
-    CurrentPlaybackContext,
     type CurrentPlaybackAction,
+    CurrentPlaybackContext,
     type CurrentPlaybackState,
+    PlayBackActionType,
 } from "./CurrentPlaybackContext.ts";
 
 interface CurrentPlaybackContextProviderProps {
@@ -10,34 +11,31 @@ interface CurrentPlaybackContextProviderProps {
     maxStep: number;
 }
 
-const initialState: CurrentPlaybackState = {
-    currentStep: 0,
-    isPlaying: false,
-};
-
 const currentPlaybackReducer = (
     state: CurrentPlaybackState,
     action: CurrentPlaybackAction,
 ): CurrentPlaybackState => {
     switch (action.type) {
-        case "PLAY":
+        case PlayBackActionType.play:
             return {
                 ...state,
                 isPlaying: true,
             };
-        case "PAUSE":
+        case PlayBackActionType.pause:
             return {
                 ...state,
                 isPlaying: false,
             };
-        case "RESET":
+        case PlayBackActionType.reset:
             return {
+                ...state,
                 currentStep: 0,
                 isPlaying: false,
             };
-        case "NEXT_STEP":
+        case PlayBackActionType.nextStep:
             if (state.currentStep >= action.maxStep) {
                 return {
+                    ...state,
                     currentStep: action.maxStep,
                     isPlaying: false,
                 };
@@ -45,6 +43,7 @@ const currentPlaybackReducer = (
 
             if (state.currentStep + 1 >= action.maxStep) {
                 return {
+                    ...state,
                     currentStep: action.maxStep,
                     isPlaying: false,
                 };
@@ -54,12 +53,26 @@ const currentPlaybackReducer = (
                 ...state,
                 currentStep: state.currentStep + 1,
             };
+        case PlayBackActionType.prevStep:
+            return {
+                ...state,
+                currentStep:  Math.max(0, state.currentStep - 1),
+                isPlaying: false
+            }
+
         default:
             return state;
     }
 };
 
 const CurrentPlaybackContextProvider = ({children, maxStep}: CurrentPlaybackContextProviderProps) => {
+
+    const initialState: CurrentPlaybackState = {
+        currentStep: 0,
+        isPlaying: false,
+        maxStep,
+    };
+
     const [state, dispatch] = useReducer(currentPlaybackReducer, initialState);
 
     useEffect(() => {
@@ -68,7 +81,7 @@ const CurrentPlaybackContextProvider = ({children, maxStep}: CurrentPlaybackCont
         }
 
         const intervalId = window.setInterval(() => {
-            dispatch({type: "NEXT_STEP", maxStep});
+            dispatch({type: PlayBackActionType.nextStep, maxStep});
         }, 500);
 
         return () => window.clearInterval(intervalId);
