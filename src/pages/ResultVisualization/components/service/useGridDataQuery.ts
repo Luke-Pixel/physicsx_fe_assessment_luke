@@ -16,7 +16,6 @@ const fetchGridData = async () => {
     if(!allDataResponse.ok) {
         throw new Error('Failed to fetch data');
     }
-    console.log(allDataResponse);
     return await allDataResponse.json();
 };
 
@@ -36,6 +35,5 @@ const fetchGrid = async () => {
     if(!allDataResponse.ok) {
         throw new Error('Failed to fetch grid');
     }
-    console.log(allDataResponse);
     return await allDataResponse.json();
 };
