@@ -1,44 +1,8 @@
-import {useContext, useMemo} from "react";
 import "./ResultsVisualization.css";
 import Header from "./components/Header/Header.tsx";
-import DataGrid from "./components/DataGrid/DataGrid.tsx";
-import CurrentPlaybackContextProvider from "./store/CurrentPlaybackContextProvider.tsx";
 import SelectedUnitContextProvider from "./store/SelectedUnitContextProvider.tsx";
-import PlaybackControls from "./components/PlaybackControls/PlaybackControls.tsx";
 import {useGridDataQuery, useGridQuery} from "./components/service/useGridDataQuery.ts";
-import {CurrentPlaybackContext} from "./store/CurrentPlaybackContext.ts";
-import {SelectedUnitContext} from "./store/SelectedUnitContext.ts";
-import {formatGridData, FormattedGridCell, type GridDataResponse} from "../../utils/formating.ts";
-
-interface GridResponse {
-    grid: Record<string, number[][]>;
-}
-
-interface ResultsVisualizationContentProps {
-    grid: GridResponse;
-    gridData: GridDataResponse;
-}
-
-const ResultsVisualizationContent = ({grid, gridData}: ResultsVisualizationContentProps) => {
-    const {selectedUnit} = useContext(SelectedUnitContext);
-    const {
-        state: {currentStep},
-    } = useContext(CurrentPlaybackContext);
-
-    const gridSize = useMemo<number>(() => grid.grid[selectedUnit].length, [grid, selectedUnit])
-    const cells = useMemo<FormattedGridCell[]>(() => formatGridData(gridData, selectedUnit, currentStep, gridSize), [selectedUnit, currentStep, gridData, gridSize]);
-
-    return (
-        <div>
-            <div className="header">
-                <Header/>
-            </div>
-            <div className="grid">
-                <DataGrid cells={cells} gridSize={gridSize}/>
-            </div>
-        </div>
-    );
-};
+import {GridView} from "./components/GridView/GridView.tsx";
 
 const ResultsVisualization = () => {
     const {data: gridData, isLoading: isGridDataLoading, isError: isGridDataError, refetch: refetchGridData} = useGridDataQuery();
@@ -57,18 +21,16 @@ const ResultsVisualization = () => {
         return <p>Loading Grid Data...</p>;
     }
 
-    const maxStep = gridData.iterations.length ? gridData.iterations.length - 1 : 0;
-
     return (
         <div className="container">
-            <CurrentPlaybackContextProvider maxStep={maxStep}>
-                <SelectedUnitContextProvider>
-                    <ResultsVisualizationContent grid={grid} gridData={gridData}/>
-                </SelectedUnitContextProvider>
-                <div className="controls">
-                    <PlaybackControls/>
+            <SelectedUnitContextProvider>
+                <div className="header">
+                    <Header />
                 </div>
-            </CurrentPlaybackContextProvider>
+                <div className="grid-view">
+                    <GridView/>
+                </div>
+            </SelectedUnitContextProvider>
         </div>
     );
 };
