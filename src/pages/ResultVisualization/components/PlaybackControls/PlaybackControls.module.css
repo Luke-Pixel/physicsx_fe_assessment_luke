@@ -1,0 +1,16 @@
+.playback-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.playback-speed-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

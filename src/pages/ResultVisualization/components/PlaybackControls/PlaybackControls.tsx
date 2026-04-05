@@ -1,14 +1,14 @@
 import {useContext} from "react";
 import {CurrentPlaybackContext, PlayBackActionType} from "../../store/CurrentPlaybackContext.ts";
-
+import styles from "./PlaybackControls.module.css"
 const PlaybackControls = () => {
     const {state, dispatch} = useContext(CurrentPlaybackContext);
 
     return (
-        <div>
-            <div style={{display: "flex", gap: "12px"}}>
+        <div className={styles.controls}>
+            <div className={styles['playback-buttons']}>
                 <button disabled={state.currentStep === 0} onClick={() => dispatch({type: PlayBackActionType.prevStep})}>Prev Step</button>
-                <button type="button" disabled={state.isPlaying} onClick={() => dispatch({type: PlayBackActionType.play})}>
+                <button type="button" disabled={state.isPlaying || state.currentStep === state.maxStep} onClick={() => dispatch({type: PlayBackActionType.play})}>
                     Play
                 </button>
                 <button type="button" disabled={!state.isPlaying} onClick={() => dispatch({type: PlayBackActionType.pause})}>
@@ -19,7 +19,7 @@ const PlaybackControls = () => {
                     Reset
                 </button>
             </div>
-            <div className='playback-control-container'>
+            <div className={styles['playback-speed-control']}>
                 <label htmlFor="playback-range">Playback Speed:</label>
                 <input
                     id='playback-range'
@@ -37,7 +37,7 @@ const PlaybackControls = () => {
                 />
                 <span>{state.intervalMs}ms</span>
             </div>
-            <p>Current Step: {state.currentStep}</p>
+            <div>Current Step: {state.currentStep}</div>
         </div>
     );
 };
