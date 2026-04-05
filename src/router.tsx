@@ -1,15 +1,13 @@
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter } from "react-router";
 
-import mainRoutes from './pages/routes';
-import Root from './Root';
+import mainRoutes from "./pages/routes";
+import Root from "./Root";
 
 const routesConfiguration = [
   {
-    children: [
-      ...mainRoutes,
-    ],
+    children: [...mainRoutes],
     element: <Root />,
-    path: '/',
+    path: "/",
   },
 ];
 

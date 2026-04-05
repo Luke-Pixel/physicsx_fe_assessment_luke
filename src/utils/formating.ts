@@ -1,9 +1,9 @@
-import {createColorScale} from "./createColorScale.ts";
+import { createColorScale } from "./createColorScale.ts";
 
 export enum Unit {
-  pressure = 'pressure',
-  kelvin = 'kelvin',
-  temperature = 'temperature',
+  pressure = "pressure",
+  kelvin = "kelvin",
+  temperature = "temperature",
 }
 
 export interface GridMetricValues {
@@ -65,7 +65,9 @@ export function formatGridData(
     return [];
   }
 
-  const metricGrid = Array.from({length: gridSize}, () => Array.from({length: gridSize}, () => 0));
+  const metricGrid = Array.from({ length: gridSize }, () =>
+    Array.from({ length: gridSize }, () => 0),
+  );
 
   activeIteration.values.forEach(([row, column, metrics]) => {
     metricGrid[row][column] = parseMetricValue(metrics[selectedUnit]);

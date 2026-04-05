@@ -9,7 +9,7 @@ export const routes: RouteObject[] = [
   },
   {
     lazy: lazyLoadHelper(
-      () => import("./ResultVisualization/ResultsVisualization")
+      () => import("./ResultVisualization/ResultsVisualization"),
     ),
     path: "/resultViz",
   },

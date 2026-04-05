@@ -1,50 +1,50 @@
-import {createContext, type Dispatch} from "react";
+import { createContext, type Dispatch } from "react";
 
 export enum PlayBackActionType {
-    play = 'PLAY',
-    pause = 'PAUSE',
-    reset = 'RESET',
-    nextStep = 'NEXT_STEP',
-    nextSingleStep = 'NEXT_SINGLE_STEP',
-    prevStep = 'PREV_STEP',
-    setIntervalMs = 'SET_INTERVAL_MS',
-    maxStepChange = 'SET_MAX_STEP'
+  play = "PLAY",
+  pause = "PAUSE",
+  reset = "RESET",
+  nextStep = "NEXT_STEP",
+  nextSingleStep = "NEXT_SINGLE_STEP",
+  prevStep = "PREV_STEP",
+  setIntervalMs = "SET_INTERVAL_MS",
+  maxStepChange = "SET_MAX_STEP",
 }
 
 export type CurrentPlaybackAction =
-    | {type: PlayBackActionType.play}
-    | {type: PlayBackActionType.pause}
-    | {type: PlayBackActionType.reset}
-    | {type: PlayBackActionType.nextStep}
-    | {type: PlayBackActionType.prevStep}
-    | {type: PlayBackActionType.nextSingleStep}
-    | {type: PlayBackActionType.setIntervalMs; intervalMs: number}
-    | {type: PlayBackActionType.maxStepChange; maxStep: number};
-
+  | { type: PlayBackActionType.play }
+  | { type: PlayBackActionType.pause }
+  | { type: PlayBackActionType.reset }
+  | { type: PlayBackActionType.nextStep }
+  | { type: PlayBackActionType.prevStep }
+  | { type: PlayBackActionType.nextSingleStep }
+  | { type: PlayBackActionType.setIntervalMs; intervalMs: number }
+  | { type: PlayBackActionType.maxStepChange; maxStep: number };
 
 export interface CurrentPlaybackState {
-    currentStep: number;
-    isPlaying: boolean;
-    maxStep: number;
-    intervalMs: number;
+  currentStep: number;
+  isPlaying: boolean;
+  maxStep: number;
+  intervalMs: number;
 }
 
 export interface CurrentPlaybackContextValue {
-    state: CurrentPlaybackState;
-    dispatch: Dispatch<CurrentPlaybackAction>;
+  state: CurrentPlaybackState;
+  dispatch: Dispatch<CurrentPlaybackAction>;
 }
 
 const defaultState: CurrentPlaybackState = {
-    currentStep: 0,
-    isPlaying: false,
-    maxStep: 0,
-    intervalMs: 500,
+  currentStep: 0,
+  isPlaying: false,
+  maxStep: 0,
+  intervalMs: 500,
 };
 
 const defaultContextValue: CurrentPlaybackContextValue = {
-    state: defaultState,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    dispatch: (_action: CurrentPlaybackAction) => undefined,
+  state: defaultState,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  dispatch: (_action: CurrentPlaybackAction) => undefined,
 };
 
-export const CurrentPlaybackContext = createContext<CurrentPlaybackContextValue>(defaultContextValue);
+export const CurrentPlaybackContext =
+  createContext<CurrentPlaybackContextValue>(defaultContextValue);
