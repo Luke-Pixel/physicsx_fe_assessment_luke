@@ -1,14 +1,12 @@
-import { type ReactNode, useState } from "react";
-import { SelectedUnitContext } from "./SelectedUnitContext.ts";
-import { Unit } from "../../../utils/formating.ts";
+import { type ReactNode, useState } from 'react';
+import { SelectedUnitContext } from './SelectedUnitContext.ts';
+import { Unit } from '../../../utils/formating.ts';
 
 interface SelectedUnitContextProviderProps {
   children: ReactNode;
 }
 
-const SelectedUnitContextProvider = ({
-  children,
-}: SelectedUnitContextProviderProps) => {
+const SelectedUnitContextProvider = ({ children }: SelectedUnitContextProviderProps) => {
   const [selectedUnit, setSelectedUnit] = useState(Unit.pressure);
 
   return (

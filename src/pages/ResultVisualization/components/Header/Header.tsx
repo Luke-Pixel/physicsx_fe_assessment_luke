@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { Unit } from "../../../../utils/formating.ts";
-import { SelectedUnitContext } from "../../store/SelectedUnitContext.ts";
-import { capitalize } from "lodash";
+import { useContext } from 'react';
+import { Unit } from '../../../../utils/formating.ts';
+import { SelectedUnitContext } from '../../store/SelectedUnitContext.ts';
+import { capitalize } from 'lodash';
 
 const units = Object.values(Unit);
 
@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <div className="header">
-      <div style={{ display: "flex", gap: "12px" }}>
+      <div style={{ display: 'flex', gap: '12px' }}>
         {units.map((unit) => (
           <button
             key={unit}

@@ -1,12 +1,9 @@
-import "./ResultsVisualization.module.css";
-import Header from "./components/Header/Header.tsx";
-import SelectedUnitContextProvider from "./store/SelectedUnitContextProvider.tsx";
-import {
-  useGridDataQuery,
-  useGridQuery,
-} from "./components/service/useGridDataQuery.ts";
-import { GridView } from "./components/GridView/GridView.tsx";
-import styles from "./ResultsVisualization.module.css";
+import './ResultsVisualization.module.css';
+import Header from './components/Header/Header.tsx';
+import SelectedUnitContextProvider from './store/SelectedUnitContextProvider.tsx';
+import { useGridDataQuery, useGridQuery } from './components/service/useGridDataQuery.ts';
+import { GridView } from './components/GridView/GridView.tsx';
+import styles from './ResultsVisualization.module.css';
 
 const ResultsVisualization = () => {
   const {
@@ -30,8 +27,7 @@ const ResultsVisualization = () => {
   if (isGridDataError || isGridError) {
     return (
       <span>
-        Error fetching Grid Data...{" "}
-        <button onClick={() => onRefetch()}>retry</button>
+        Error fetching Grid Data... <button onClick={() => onRefetch()}>retry</button>
       </span>
     );
   }
@@ -44,10 +40,10 @@ const ResultsVisualization = () => {
     <div className={styles.container}>
       <SelectedUnitContextProvider>
         <div className={styles.content}>
-          <div className={styles["header-wrapper"]}>
+          <div className={styles['header-wrapper']}>
             <Header />
           </div>
-          <div className={styles["grid-wrapper"]}>
+          <div className={styles['grid-wrapper']}>
             <GridView />
           </div>
         </div>

@@ -1,9 +1,9 @@
-import { createColorScale } from "./createColorScale.ts";
+import { createColorScale } from './createColorScale.ts';
 
 export enum Unit {
-  pressure = "pressure",
-  kelvin = "kelvin",
-  temperature = "temperature",
+  pressure = 'pressure',
+  kelvin = 'kelvin',
+  temperature = 'temperature',
 }
 
 export interface GridMetricValues {
@@ -31,21 +31,21 @@ export interface FormattedGridCell {
 }
 
 export function formatValue(value: number, type: Unit) {
-  if (type === "pressure") {
+  if (type === 'pressure') {
     return value;
   }
 
-  if (type === "temperature") {
+  if (type === 'temperature') {
     return `${value} °C`;
   }
 
-  if (type === "kelvin") {
+  if (type === 'kelvin') {
     return `${value} K`;
   }
 }
 
 function parseMetricValue(value: string | number): number {
-  if (typeof value === "number") {
+  if (typeof value === 'number') {
     return value;
   }
 

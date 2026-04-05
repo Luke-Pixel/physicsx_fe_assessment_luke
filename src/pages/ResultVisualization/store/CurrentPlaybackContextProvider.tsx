@@ -1,10 +1,10 @@
-import { type ReactNode, useEffect, useReducer } from "react";
+import { type ReactNode, useEffect, useReducer } from 'react';
 import {
   type CurrentPlaybackAction,
   CurrentPlaybackContext,
   type CurrentPlaybackState,
   PlayBackActionType,
-} from "./CurrentPlaybackContext.ts";
+} from './CurrentPlaybackContext.ts';
 
 interface CurrentPlaybackContextProviderProps {
   children: ReactNode;

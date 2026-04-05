@@ -1,4 +1,4 @@
-import { LazyRouteFunction, RouteObject } from "react-router";
+import { LazyRouteFunction, RouteObject } from 'react-router';
 
 export const lazyLoadHelper = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

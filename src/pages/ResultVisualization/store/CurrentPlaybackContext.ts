@@ -1,14 +1,14 @@
-import { createContext, type Dispatch } from "react";
+import { createContext, type Dispatch } from 'react';
 
 export enum PlayBackActionType {
-  play = "PLAY",
-  pause = "PAUSE",
-  reset = "RESET",
-  nextStep = "NEXT_STEP",
-  nextSingleStep = "NEXT_SINGLE_STEP",
-  prevStep = "PREV_STEP",
-  setIntervalMs = "SET_INTERVAL_MS",
-  maxStepChange = "SET_MAX_STEP",
+  play = 'PLAY',
+  pause = 'PAUSE',
+  reset = 'RESET',
+  nextStep = 'NEXT_STEP',
+  nextSingleStep = 'NEXT_SINGLE_STEP',
+  prevStep = 'PREV_STEP',
+  setIntervalMs = 'SET_INTERVAL_MS',
+  maxStepChange = 'SET_MAX_STEP',
 }
 
 export type CurrentPlaybackAction =

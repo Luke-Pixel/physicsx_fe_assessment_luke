@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo } from 'react';
 
 interface GridCellProps {
   value: number | string | undefined;
@@ -14,13 +14,13 @@ const GridCell = ({ value, row, column, backgroundColor }: GridCellProps) => {
       data-row={row}
       data-column={column}
       style={{
-        alignItems: "center",
+        alignItems: 'center',
         backgroundColor,
-        border: "1px solid #d0d0d0",
-        display: "flex",
-        justifyContent: "center",
-        minHeight: "72px",
-        padding: "8px",
+        border: '1px solid #d0d0d0',
+        display: 'flex',
+        justifyContent: 'center',
+        minHeight: '72px',
+        padding: '8px',
       }}
     >
       {value}

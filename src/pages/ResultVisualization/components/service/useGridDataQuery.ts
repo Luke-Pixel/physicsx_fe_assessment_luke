@@ -1,35 +1,35 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
 
 export function useGridDataQuery() {
   return useQuery({
-    queryKey: ["gridData"],
+    queryKey: ['gridData'],
     queryFn: fetchGridData,
     staleTime: 5000,
   });
 }
 
 const fetchGridData = async () => {
-  const allDataResponse = await fetch("http://localhost:5001/api/iterations");
+  const allDataResponse = await fetch('http://localhost:5001/api/iterations');
 
   if (!allDataResponse.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error('Failed to fetch data');
   }
   return await allDataResponse.json();
 };
 
 export function useGridQuery() {
   return useQuery({
-    queryKey: ["grid"],
+    queryKey: ['grid'],
     queryFn: fetchGrid,
     staleTime: 5000,
   });
 }
 
 const fetchGrid = async () => {
-  const allDataResponse = await fetch("http://localhost:5001/api/grid");
+  const allDataResponse = await fetch('http://localhost:5001/api/grid');
 
   if (!allDataResponse.ok) {
-    throw new Error("Failed to fetch grid");
+    throw new Error('Failed to fetch grid');
   }
   return await allDataResponse.json();
 };

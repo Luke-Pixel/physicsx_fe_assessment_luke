@@ -1,5 +1,5 @@
-import { createContext, type Dispatch, type SetStateAction } from "react";
-import { Unit } from "../../../utils/formating.ts";
+import { createContext, type Dispatch, type SetStateAction } from 'react';
+import { Unit } from '../../../utils/formating.ts';
 
 export interface SelectedUnitContextValue {
   selectedUnit: Unit;
@@ -12,5 +12,4 @@ const defaultContextValue: SelectedUnitContextValue = {
   setSelectedUnit: (_value: SetStateAction<Unit>) => undefined,
 };
 
-export const SelectedUnitContext =
-  createContext<SelectedUnitContextValue>(defaultContextValue);
+export const SelectedUnitContext = createContext<SelectedUnitContextValue>(defaultContextValue);

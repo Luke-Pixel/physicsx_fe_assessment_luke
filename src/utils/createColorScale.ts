@@ -1,6 +1,6 @@
-import { scaleSequential } from "d3-scale";
-import { interpolatePRGn } from "d3-scale-chromatic";
-import { flatten, min, max } from "lodash";
+import { scaleSequential } from 'd3-scale';
+import { interpolatePRGn } from 'd3-scale-chromatic';
+import { flatten, min, max } from 'lodash';
 
 export function createColorScale(gridData: number[][]) {
   // Compute the range of the nested array using lodash

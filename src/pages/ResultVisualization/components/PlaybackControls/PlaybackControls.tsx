@@ -1,15 +1,12 @@
-import { useContext } from "react";
-import {
-  CurrentPlaybackContext,
-  PlayBackActionType,
-} from "../../store/CurrentPlaybackContext.ts";
-import styles from "./PlaybackControls.module.css";
+import { useContext } from 'react';
+import { CurrentPlaybackContext, PlayBackActionType } from '../../store/CurrentPlaybackContext.ts';
+import styles from './PlaybackControls.module.css';
 const PlaybackControls = () => {
   const { state, dispatch } = useContext(CurrentPlaybackContext);
 
   return (
     <div className={styles.controls}>
-      <div className={styles["playback-buttons"]}>
+      <div className={styles['playback-buttons']}>
         <button
           disabled={state.currentStep === 0}
           onClick={() => dispatch({ type: PlayBackActionType.prevStep })}
@@ -36,14 +33,11 @@ const PlaybackControls = () => {
         >
           Next Step
         </button>
-        <button
-          type="button"
-          onClick={() => dispatch({ type: PlayBackActionType.reset })}
-        >
+        <button type="button" onClick={() => dispatch({ type: PlayBackActionType.reset })}>
           Reset
         </button>
       </div>
-      <div className={styles["playback-speed-control"]}>
+      <div className={styles['playback-speed-control']}>
         <label htmlFor="playback-range">Playback Speed:</label>
         <input
           id="playback-range"
