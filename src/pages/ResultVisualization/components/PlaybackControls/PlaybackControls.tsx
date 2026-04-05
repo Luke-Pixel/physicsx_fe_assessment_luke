@@ -14,7 +14,7 @@ const PlaybackControls = () => {
                 <button type="button" disabled={!state.isPlaying} onClick={() => dispatch({type: PlayBackActionType.pause})}>
                     Pause
                 </button>
-                <button disabled={state.currentStep === state.maxStep} onClick={() => dispatch({type: PlayBackActionType.nextSingleStep, maxStep: state.maxStep})}>Next Step</button>
+                <button disabled={state.currentStep === state.maxStep} onClick={() => dispatch({type: PlayBackActionType.nextSingleStep})}>Next Step</button>
                 <button type="button" onClick={() => dispatch({type: PlayBackActionType.reset})}>
                     Reset
                 </button>

@@ -1,20 +1,20 @@
 import {act, fireEvent, render, screen} from "@testing-library/react";
-import {describe, expect, it, vi, afterEach} from "vitest";
+import {afterEach, describe, expect, it, vi} from "vitest";
 import CurrentPlaybackContextProvider from "./CurrentPlaybackContextProvider.tsx";
-import {CurrentPlaybackContext} from "./CurrentPlaybackContext.ts";
+import {CurrentPlaybackContext, PlayBackActionType} from "./CurrentPlaybackContext.ts";
 
 const CurrentPlaybackConsumer = () => (
     <CurrentPlaybackContext.Consumer>
         {({state, dispatch}) => (
             <div>
                 <span>{`${state.currentStep}-${state.isPlaying}-${state.intervalMs}`}</span>
-                <button type="button" onClick={() => dispatch({type: "PLAY"})}>
+                <button type="button" onClick={() => dispatch({type: PlayBackActionType.play})}>
                     Play
                 </button>
-                <button type="button" onClick={() => dispatch({type: "RESET"})}>
+                <button type="button" onClick={() => dispatch({type: PlayBackActionType.reset})}>
                     Reset
                 </button>
-                <button type="button" onClick={() => dispatch({type: "SET_INTERVAL_MS", intervalMs: 1000})}>
+                <button type="button" onClick={() => dispatch({type: PlayBackActionType.setIntervalMs, intervalMs: 1000})}>
                     Set Interval
                 </button>
             </div>

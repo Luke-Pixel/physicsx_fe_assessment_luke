@@ -7,17 +7,19 @@ export enum PlayBackActionType {
     nextStep = 'NEXT_STEP',
     nextSingleStep = 'NEXT_SINGLE_STEP',
     prevStep = 'PREV_STEP',
-    setIntervalMs = 'SET_INTERVAL_MS'
+    setIntervalMs = 'SET_INTERVAL_MS',
+    maxStepChange = 'SET_MAX_STEP'
 }
 
 export type CurrentPlaybackAction =
     | {type: PlayBackActionType.play}
     | {type: PlayBackActionType.pause}
     | {type: PlayBackActionType.reset}
-    | {type: PlayBackActionType.nextStep; maxStep: number}
+    | {type: PlayBackActionType.nextStep}
     | {type: PlayBackActionType.prevStep}
-    | {type: PlayBackActionType.nextSingleStep; maxStep: number}
-    | {type: PlayBackActionType.setIntervalMs; intervalMs: number};
+    | {type: PlayBackActionType.nextSingleStep}
+    | {type: PlayBackActionType.setIntervalMs; intervalMs: number}
+    | {type: PlayBackActionType.maxStepChange; maxStep: number};
 
 
 export interface CurrentPlaybackState {

@@ -50,14 +50,14 @@ const ResultsVisualization = () => {
     }
 
     if (isGridDataError || isGridError) {
-        return <div>Error fetching Grid Data... <a onClick={() => onRefetch()}>retry</a></div>;
+        return <span>Error fetching Grid Data... <button onClick={() => onRefetch()}>retry</button></span>;
     }
 
     if (isGridDataLoading || isGridLoading || !gridData || !grid) {
         return <p>Loading Grid Data...</p>;
     }
 
-    const maxStep = Math.max((gridData.iterations.length ?? 1) - 1, 0);
+    const maxStep = gridData.iterations.length ? gridData.iterations.length - 1 : 0;
 
     return (
         <div className="container">
