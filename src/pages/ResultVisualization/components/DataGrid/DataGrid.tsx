@@ -1,6 +1,8 @@
 import {type FormattedGridCell} from "../../../../utils/formating.ts";
 import GridCell from "../GridCell/GridCell.tsx";
 import styles from "./DataGrid.module.css"
+import {memo} from "react";
+
 interface GridSizeProps {
     gridProperties : GridProperties;
     cells: FormattedGridCell[];
@@ -35,4 +37,6 @@ const DataGrid = ({gridProperties, cells}: GridSizeProps) => {
     );
 };
 
-export default DataGrid;
+const DataGridMemo = memo(DataGrid)
+
+export default DataGridMemo;

@@ -1,3 +1,5 @@
+import {memo} from "react";
+
 interface GridCellProps {
     value: number | string | undefined;
     row: number;
@@ -26,4 +28,6 @@ const GridCell = ({value, row, column, backgroundColor}: GridCellProps) => {
     );
 };
 
-export default GridCell;
+const GridCellMemo = memo(GridCell)
+
+export default GridCellMemo;
