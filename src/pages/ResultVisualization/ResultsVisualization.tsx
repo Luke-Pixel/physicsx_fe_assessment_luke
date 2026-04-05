@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {useContext, useMemo} from "react";
 import "./ResultsVisualization.css";
 import Header from "./components/Header/Header.tsx";
 import DataGrid from "./components/DataGrid/DataGrid.tsx";
@@ -8,7 +8,7 @@ import PlaybackControls from "./components/PlaybackControls/PlaybackControls.tsx
 import {useGridDataQuery, useGridQuery} from "./components/service/useGridDataQuery.ts";
 import {CurrentPlaybackContext} from "./store/CurrentPlaybackContext.ts";
 import {SelectedUnitContext} from "./store/SelectedUnitContext.ts";
-import {formatGridData, type GridDataResponse} from "../../utils/formating.ts";
+import {formatGridData, FormattedGridCell, type GridDataResponse} from "../../utils/formating.ts";
 
 interface GridResponse {
     grid: Record<string, number[][]>;
@@ -25,8 +25,8 @@ const ResultsVisualizationContent = ({grid, gridData}: ResultsVisualizationConte
         state: {currentStep},
     } = useContext(CurrentPlaybackContext);
 
-    const gridSize = grid.grid[selectedUnit].length;
-    const cells = formatGridData(gridData, selectedUnit, currentStep, gridSize);
+    const gridSize = useMemo<number>(() => grid.grid[selectedUnit].length, [grid, selectedUnit])
+    const cells = useMemo<FormattedGridCell[]>(() => formatGridData(gridData, selectedUnit, currentStep, gridSize), [selectedUnit, currentStep, gridData, gridSize]);
 
     return (
         <div>
