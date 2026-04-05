@@ -67,7 +67,6 @@ const currentPlaybackReducer = (
                 };
             }
 
-
             return {
                 ...state,
                 currentStep: state.currentStep + 1,
@@ -92,11 +91,6 @@ const currentPlaybackReducer = (
 };
 
 const CurrentPlaybackContextProvider = ({children, maxStep}: CurrentPlaybackContextProviderProps) => {
-
-    useEffect(() => {
-        dispatch({type: PlayBackActionType.maxStepChange, maxStep})
-    }, [maxStep])
-
     const initialState: CurrentPlaybackState = {
         currentStep: 0,
         isPlaying: false,
@@ -105,6 +99,10 @@ const CurrentPlaybackContextProvider = ({children, maxStep}: CurrentPlaybackCont
     };
 
     const [state, dispatch] = useReducer(currentPlaybackReducer, initialState);
+
+    useEffect(() => {
+        dispatch({type: PlayBackActionType.maxStepChange, maxStep})
+    }, [maxStep])
 
     useEffect(() => {
         if (!state.isPlaying) {
