@@ -1,18 +1,26 @@
 import {type FormattedGridCell} from "../../../../utils/formating.ts";
 import GridCell from "../GridCell/GridCell.tsx";
-
+import styles from "./DataGrid.module.css"
 interface GridSizeProps {
-    gridSize: number;
+    gridProperties : GridProperties;
     cells: FormattedGridCell[];
 }
 
-const DataGrid = ({gridSize, cells}: GridSizeProps) => {
-    const gridTemplateColumns = `repeat(${gridSize}, minmax(0, 1fr))`;
+export interface GridProperties {
+    gridRows: number;
+    gridColumns: number;
+}
 
+const DataGrid = ({gridProperties, cells}: GridSizeProps) => {
+
+    const gridStyles = {
+        gridTemplateColumns: `repeat(${gridProperties.gridColumns}, minmax(0, 1fr))`,
+        girdTemplateRows: `repeat(${gridProperties.gridRows}, minmax(0, 1fr))`,
+    }
     return (
         <div
-            className="data-grid-container"
-            style={{display: "grid", gap: "12px", gridTemplateColumns}}
+            className={styles["data-grid"]}
+            style={gridStyles}
         >
             {cells.map(({row, column, value, backgroundColor}) => (
                 <GridCell

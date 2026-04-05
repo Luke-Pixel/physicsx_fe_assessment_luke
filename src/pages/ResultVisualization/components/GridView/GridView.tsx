@@ -5,7 +5,8 @@ import {useContext, useMemo} from "react";
 import {SelectedUnitContext} from "../../store/SelectedUnitContext.ts";
 import {formatGridData, FormattedGridCell, GridDataResponse} from "../../../../utils/formating.ts";
 import {CurrentPlaybackContext} from "../../store/CurrentPlaybackContext.ts";
-import DataGrid from "../DataGrid/DataGrid.tsx";
+import DataGrid, {GridProperties} from "../DataGrid/DataGrid.tsx";
+import gridViewStyles from './GridView.module.css'
 
 interface GridResponse {
     grid: Record<string, number[][]>;
@@ -24,7 +25,7 @@ export const GridView = () => {
 
     return (
         <CurrentPlaybackContextProvider maxStep={maxStep}>
-            <div className="grid-view-content">
+            <div className={gridViewStyles['grid-view-content']}>
                 <GridViewContent grid={grid} gridData={gridData}/>
             </div>
             <div className="controls">
@@ -43,9 +44,16 @@ const GridViewContent = ({grid, gridData}: ResultsVisualizationContentProps) => 
     const gridSize = useMemo<number>(() => grid.grid[selectedUnit].length, [grid, selectedUnit])
     const cells = useMemo<FormattedGridCell[]>(() => formatGridData(gridData, selectedUnit, currentStep, gridSize), [selectedUnit, currentStep, gridData, gridSize]);
 
+    const gridProperties = useMemo<GridProperties>(()=> (
+        {
+            gridColumns: grid.grid[selectedUnit][0].length,
+            gridRows: grid.grid[selectedUnit].length
+        }
+    ), [grid, selectedUnit])
+
     return (
-        <div className="grid">
-            <DataGrid cells={cells} gridSize={gridSize}/>
+        <div className={gridViewStyles['grid']}>
+            <DataGrid cells={cells} gridProperties={gridProperties}/>
         </div>
     );
 };

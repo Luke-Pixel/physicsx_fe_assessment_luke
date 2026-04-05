@@ -1,8 +1,9 @@
-import "./ResultsVisualization.css";
+import "./ResultsVisualization.module.css";
 import Header from "./components/Header/Header.tsx";
 import SelectedUnitContextProvider from "./store/SelectedUnitContextProvider.tsx";
 import {useGridDataQuery, useGridQuery} from "./components/service/useGridDataQuery.ts";
 import {GridView} from "./components/GridView/GridView.tsx";
+import styles from "./ResultsVisualization.module.css";
 
 const ResultsVisualization = () => {
     const {data: gridData, isLoading: isGridDataLoading, isError: isGridDataError, refetch: refetchGridData} = useGridDataQuery();
@@ -22,13 +23,15 @@ const ResultsVisualization = () => {
     }
 
     return (
-        <div className="container">
+        <div className={styles.container}>
             <SelectedUnitContextProvider>
-                <div className="header">
-                    <Header />
-                </div>
-                <div className="grid-view">
-                    <GridView/>
+                <div className={styles.content}>
+                    <div className={styles['header-wrapper']}>
+                        <Header />
+                    </div>
+                    <div className={styles['grid-wrapper']}>
+                        <GridView/>
+                    </div>
                 </div>
             </SelectedUnitContextProvider>
         </div>

@@ -9,7 +9,7 @@ const Header = () => {
     const {selectedUnit, setSelectedUnit} = useContext(SelectedUnitContext);
 
     return (
-        <div className="header-wrapper">
+        <div className="header">
             <div style={{display: "flex", gap: "12px"}}>
                 {units.map((unit) => (
                     <button
